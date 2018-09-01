@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Week7Capstone.DAL;
+using Week7Capstone.Models;
+using Week7Capstone;
 
 namespace Week7Capstone.Controllers
 {
@@ -17,9 +19,14 @@ namespace Week7Capstone.Controllers
         private NorthwindDBContext db = new NorthwindDBContext();
 
         // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        public IQueryable<ProductViewModel> GetProducts()
         {
-            return db.Products;
+            var model = db.Products.Select(x => new ProductViewModel
+            {
+                ProductId = x.ProductID,
+                ProductName = x.ProductName
+            });
+            return model.OrderBy(x => x.ProductId);
         }
 
         // GET: api/Products/5

@@ -11,8 +11,6 @@ namespace Week7Capstone.DAL
         public NorthwindDBContext()
             : base("name=NorthwindDBContext")
         {
-            (this as IObjectContextAdapter).ObjectContext.ContextOptions.UseCSharpNullComparisonBehavior = true;
-
             Configuration.LazyLoadingEnabled = false;
         }
 
